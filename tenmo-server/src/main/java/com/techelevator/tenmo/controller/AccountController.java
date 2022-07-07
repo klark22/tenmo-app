@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -25,6 +26,11 @@ public class AccountController {
     @RequestMapping(path="/{id}", method = RequestMethod.PUT)
     public void put(@RequestBody Account account, @PathVariable int id) {
         dao.updateBalance(account, id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Account> get() {
+        return dao.listOfAccounts();
     }
 
 
