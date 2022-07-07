@@ -5,6 +5,7 @@ import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,21 +34,45 @@ public class JdbcTransfer implements TransferDao{
     }
 
     @Override
-    public Transfer getTransferById(int transferId) {
-        return null;
+    public Transfer getTransferByTransferId(int transferId) {
+        Transfer transfer = new Transfer();
+
+        String sql = "Select transfer_id, transfer_type_id, transfer_status_id, account_from, account_to, amount " +
+                "FROM transfer " +
+                "WHERE transfer_id = ?;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, transferId);
+
+        while (result.next()) {
+            transfer = mapRowToTransfer(result);
+
+        }
+        return transfer;
     }
 
     @Override
-    public void updateTransferBalance(Transfer transfer) {
+    public void updateTransferBalance(int accountFromId, int accountToId, BigDecimal transferAmount) {
 
+    }
+
+    @Override
+    public Transfer createTransfer(Transfer transfer) {
+        String sql = "INSERT INTO transfer ( transfer_type_id, " +
+                "transfer_status_id, account_from, account_to, amount) " +
+                "VALUES ( ?, ?, ?, ?, ?) RETURNING transfer_id;";
+
+
+
+        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, transfer.getType_id(), transfer.getStatus_id(),
+                transfer.getAccount_from(),transfer.getAccount_to(), transfer.getAmount());
+        return getTransferByTransferId(newId);
     }
 
     private Transfer mapRowToTransfer(SqlRowSet results) {
         Transfer transfer = new Transfer();
         transfer.setTransfer_id(results.getInt("transfer_id"));
-        transfer.setUser_id(results.getInt("user_id"));
-        transfer.setType_id(results.getInt("type_id"));
-        transfer.setStatus_id(results.getInt("status_id"));
+        transfer.setType_id(results.getInt("transfer_type_id"));
+        transfer.setStatus_id(results.getInt("transfer_status_id"));
         transfer.setAccount_from(results.getInt("account_from"));
         transfer.setAccount_to(results.getInt("account_to"));
 

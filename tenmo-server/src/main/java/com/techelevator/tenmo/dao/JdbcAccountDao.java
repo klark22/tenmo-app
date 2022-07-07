@@ -22,10 +22,9 @@ public class JdbcAccountDao implements AccountDao{
     public BigDecimal getBalance(int userId) {
         Account account = new Account();
 
-        String sql = "SELECT balance FROM account WHERE user_id = ?;";
+        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?;";
 
-        //return this.jdbcTemplate.queryForObject(sql, BigDecimal.class, userId);
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, BigDecimal.class, userId);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
 
         while (result.next()) {
             account = mapRowSetToAccount(result);
@@ -39,13 +38,15 @@ public class JdbcAccountDao implements AccountDao{
 
 
 
-    @Override
+    /*@Override
     public void updateBalance(Account account, int id) {
         String sql = "UPDATE account " +
                 "SET account_id = ?, user_id = ?, balance = ? " +
                 "WHERE account_id = ?;";
-        jdbcTemplate.update(sql, account.getAccountId(), account.getUserId(), account.getBalance(), account.getAccountId());
+        jdbcTemplate.update(sql, account.getUserId(), account.getBalance(), account.getAccountId());
     }
+
+     */
 
     @Override
     public List<Account> listOfAccounts() {

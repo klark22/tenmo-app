@@ -23,10 +23,12 @@ public class AccountController {
         return dao.getBalance(id);
     }
 
-    @RequestMapping(path="/{id}", method = RequestMethod.PUT)
+  /*  @RequestMapping(path="/{id}", method = RequestMethod.PUT)
     public void put(@RequestBody Account account, @PathVariable int id) {
         dao.updateBalance(account, id);
     }
+
+   */
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Account> get() {

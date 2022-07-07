@@ -13,12 +13,14 @@ public interface TransferDao {
 
     // get transfer by transfer id
 
-    Transfer getTransferById(int transferId);
+    Transfer getTransferByTransferId(int transferId);
 
     // update balance
 
-    void updateTransferBalance (Transfer transfer);
+    void updateTransferBalance (int accountFromId, int accountToId, BigDecimal transferAmount);
 
+
+    Transfer createTransfer (Transfer transfer);
 
 
 

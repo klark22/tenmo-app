@@ -10,7 +10,7 @@ public interface AccountDao {
 
     public BigDecimal getBalance(int userId);
 
-    public void updateBalance(Account account, int id);
+   // public void updateBalance(Account account, int id);
 
     public List<Account> listOfAccounts();
 
