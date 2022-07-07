@@ -27,11 +27,6 @@ public class TransferController {
     public Transfer transferByTransferId (@PathVariable int transferId) {return dao.getTransferByTransferId(transferId);
     }
 
-    //update
-
-
-
-
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public Transfer newTransfer ( @RequestBody Transfer transfer) {

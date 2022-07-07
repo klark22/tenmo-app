@@ -1,5 +1,6 @@
 package com.techelevator.tenmo.dao;
 
+import com.techelevator.tenmo.model.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -58,6 +59,22 @@ public class JdbcTransfer implements TransferDao{
     @Override
     public Transfer createTransfer(Transfer transfer) {
 
+        Account fromAccount = new Account();
+        String sqlAcc = "SELECT account_id, user_id, balance " +
+                "FROM account " +
+                "WHERE account_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlAcc, transfer.getAccount_from());
+        while (result.next()) {
+            fromAccount = mapRowSetToAccount(result);
+        }
+        if (fromAccount.getBalance().compareTo(transfer.getAmount()) < 0) {
+            System.out.println("Insufficient Balance");
+            return null;
+        } else if (fromAccount.getAccountId() == transfer.getAccount_to()) {
+            System.out.println("Cannot pay yourself, chief :(");
+            return null;
+        }
+
         // step 1: insert a row into transfer
         String sql = "INSERT INTO transfer ( transfer_type_id, " +
                 "transfer_status_id, account_from, account_to, amount) " +
@@ -92,5 +109,15 @@ public class JdbcTransfer implements TransferDao{
 
         return transfer;
 
+    }
+
+    private Account mapRowSetToAccount(SqlRowSet rowSet) {
+        Account account = new Account();
+
+        account.setAccountId(rowSet.getInt("account_id"));
+        account.setUserId(rowSet.getInt("user_id"));
+        account.setBalance(rowSet.getBigDecimal("balance"));
+
+        return account;
     }
 }
