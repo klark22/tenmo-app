@@ -23,7 +23,7 @@ public class JdbcTransfer implements TransferDao{
     @Override
     public List<Transfer> listTransfersByUserId(int userId) {
         List<Transfer> transfers = new ArrayList<Transfer>();
-        String sql = "SELECT * " +
+        String sql = "SELECT transfer_id " +
                     "From transfer;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()){
@@ -57,14 +57,27 @@ public class JdbcTransfer implements TransferDao{
 
     @Override
     public Transfer createTransfer(Transfer transfer) {
+
+        // step 1: insert a row into transfer
         String sql = "INSERT INTO transfer ( transfer_type_id, " +
                 "transfer_status_id, account_from, account_to, amount) " +
                 "VALUES ( ?, ?, ?, ?, ?) RETURNING transfer_id;";
 
-
-
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, transfer.getType_id(), transfer.getStatus_id(),
                 transfer.getAccount_from(),transfer.getAccount_to(), transfer.getAmount());
+
+
+        // step 2: run a sql statement that updates account and deducts money from the sender
+        String sql2 = "UPDATE account " +
+                    "SET balance = balance - ? " +
+                    "WHERE account_id = ?;";
+            jdbcTemplate.update(sql2, transfer.getAmount(), transfer.getAccount_from());
+        // step 3: run a sql statement that updates account and adds money to the recipient
+        String sql3 = "UPDATE account " +
+                "SET balance = balance + ? " +
+                "WHERE account_id = ?;";
+        jdbcTemplate.update(sql3, transfer.getAmount(), transfer.getAccount_to());
+
         return getTransferByTransferId(newId);
     }
 
@@ -75,6 +88,7 @@ public class JdbcTransfer implements TransferDao{
         transfer.setStatus_id(results.getInt("transfer_status_id"));
         transfer.setAccount_from(results.getInt("account_from"));
         transfer.setAccount_to(results.getInt("account_to"));
+        transfer.setAmount(results.getBigDecimal("amount"));
 
         return transfer;
 
