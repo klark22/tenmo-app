@@ -35,12 +35,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../kourtney-lark-student-code/module-2/16_Securing_APIs/exercise/client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cary-beam-student-code/module-2/16_Securing_APIs/exercise/client" />
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.techelevator.tenmo.App" />
-      <module name="tenmo-client" />
+      <module name="m02-capstone-client" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.techelevator.tenmo.*" />
@@ -67,5 +67,9 @@
       <updated>1657114536407</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:io.cucumber:cucumber-java" />
+    <option featureType="dependencySupport" implementationName="java:org.seleniumhq.selenium:selenium-java" />
   </component>
 </project>

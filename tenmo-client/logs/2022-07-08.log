@@ -1,1 +1,28 @@
 2022-07-08T00:50:54.3531408 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:05:38.1082314 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:06:00.240139 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:06:11.5509049 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:06:19.1452366 I/O error on POST request for "http://localhost:8080/register": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:06:43.907042 I/O error on POST request for "http://localhost:8080/register": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-08T10:07:53.4645339 404 : [{"timestamp":"2022-07-08T14:07:53.401+00:00","status":404,"error":"Not Found","message":"No message available","path":"/login"}]
+2022-07-08T10:07:57.5541258 404 : [{"timestamp":"2022-07-08T14:07:57.551+00:00","status":404,"error":"Not Found","message":"No message available","path":"/login"}]
+2022-07-08T10:08:10.3857154 404 : [{"timestamp":"2022-07-08T14:08:10.364+00:00","status":404,"error":"Not Found","message":"No message available","path":"/login"}]
+2022-07-08T10:08:16.0749543 404 : [{"timestamp":"2022-07-08T14:08:16.072+00:00","status":404,"error":"Not Found","message":"No message available","path":"/register"}]
+2022-07-08T10:11:23.9703767 I/O error on GET request for "http://hosthost:8080/account/1001": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:12:13.0864594 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:32:26.3530865 I/O error on GET request for "http://hosthost:8080/account/com.techelevator.tenmo.model.AuthenticatedUser@7db12bb6": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:37:06.8668704 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:37:55.5435787 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:38:56.7693688 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:52:04.676827 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:54:05.140771 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T10:56:49.0063122 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:06:47.7748143 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:07:03.7039694 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:09:03.9358472 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:12:00.8723736 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:12:23.0249838 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:12:50.2106026 I/O error on GET request for "http://hosthost:8080/account/1003": hosthost; nested exception is java.net.UnknownHostException: hosthost
+2022-07-08T11:35:41.9389641 500 : [{"timestamp":"2022-07-08T15:35:41.917+00:00","status":500,"error":"Internal Server Error","message":"Ambiguous handler methods mapped for '/transfer/1003': {public java.util.List com.techelevator.tenm... (406 bytes)]
+2022-07-08T11:36:40.7876809 500 : [{"timestamp":"2022-07-08T15:36:40.768+00:00","status":500,"error":"Internal Server Error","message":"Ambiguous handler methods mapped for '/transfer/1003': {public java.util.List com.techelevator.tenm... (406 bytes)]
+2022-07-08T11:38:27.0213942 500 : [{"timestamp":"2022-07-08T15:38:27.018+00:00","status":500,"error":"Internal Server Error","message":"Ambiguous handler methods mapped for '/transfer/1003': {public com.techelevator.tenmo.model.Transfe... (406 bytes)]

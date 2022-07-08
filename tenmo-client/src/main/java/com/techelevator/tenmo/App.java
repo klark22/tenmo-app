@@ -1,10 +1,7 @@
 package com.techelevator.tenmo;
 
-import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.*;
 
-import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.ConsoleService;
@@ -65,6 +62,7 @@ public class App {
         if (currentUser == null) {
             consoleService.printErrorMessage();
         }
+        accountService.setAuthToken(currentUser.getToken());
     }
 
     private void mainMenu() {
@@ -91,13 +89,32 @@ public class App {
         }
     }
 
+    private void printTransfersOrError(Transfer[] transfers) {
+        if (transfers != null) {
+            consoleService.printTransfers(transfers);
+        }else {
+            consoleService.printErrorMessage();
+        }
+    }
+
+    private void printUsersOrError(User[] users) {
+        if (users != null) {
+            consoleService.printUsers(users);
+        }else {
+            consoleService.printErrorMessage();
+        }
+    }
+
 	private void viewCurrentBalance() {
-        BigDecimal balance = accountService.getBalance();
+        BigDecimal balance = accountService.getBalance(currentUser);
         System.out.print("Current balance: " + balance);
+
 	}
 
 	private void viewTransferHistory() {
 
+        Transfer[] transfers = accountService.listTransfersByUserId(currentUser);
+        printTransfersOrError(transfers);
 
 	}
 
@@ -108,6 +125,8 @@ public class App {
 
 	private void sendBucks() {
 		// TODO Auto-generated method stub
+        //User[] users = accountService.listAccounts();
+
 		
 	}
 

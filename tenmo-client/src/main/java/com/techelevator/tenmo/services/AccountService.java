@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.services;
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.util.BasicLogger;
 import org.springframework.http.*;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class AccountService {
 
-    private static final String API_BASE_URL = "http://hosthost:8080";
+    private static final String API_BASE_URL = "http://localhost:8080";
     private final RestTemplate restTemplate = new RestTemplate();
 
     private String authToken = null;
@@ -64,14 +65,15 @@ public class AccountService {
         return accounts;
     }
 
-    public BigDecimal getBalance(int userId) {
+    public BigDecimal getBalance(AuthenticatedUser currentUser) {
         BigDecimal balance = null;
-
+        long id = currentUser.getUser().getId();
         try {
+            String temp = API_BASE_URL + "/account/" + id;
+            ResponseEntity<Double> response = restTemplate.exchange(API_BASE_URL + "/account/" + id, HttpMethod.GET, makeAuthEntity(), Double.class);
 
-            ResponseEntity<BigDecimal> response = restTemplate.exchange(API_BASE_URL + "/account/" + userId, HttpMethod.GET, makeAuthEntity(), BigDecimal.class);
+           balance = new BigDecimal(response.getBody());
 
-            balance = response.getBody();
 
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
@@ -80,11 +82,12 @@ public class AccountService {
         return balance;
     }
 
-    public Transfer[] listTransfersByUserId(int userId) {
+    public Transfer[] listTransfersByUserId(AuthenticatedUser currentUser) {
         Transfer[] transfers = null;
+        long id = currentUser.getUser().getId();
 
-        try {  //USE makeAUTH ENTITY becaause its not a put or post
-            ResponseEntity<Transfer[]> response = restTemplate.exchange(API_BASE_URL +"/transfer/" + userId, HttpMethod.GET, makeAuthEntity(), Transfer[].class);
+        try {  //USE makeAUTH ENTITY because its not a put or post
+            ResponseEntity<Transfer[]> response = restTemplate.exchange(API_BASE_URL +"/transfer/" + id, HttpMethod.GET, makeAuthEntity(), Transfer[].class);
 
             transfers = response.getBody();
 

@@ -22,12 +22,12 @@ public class TransferController {
     }
 
 
-    @RequestMapping(path = "/{userid}", method = RequestMethod.GET)
-    public List<Transfer> transfersByUserId (@PathVariable int userId) {return dao.listTransfersByUserId(userId);
+    @RequestMapping(path = "/{accountId}", method = RequestMethod.GET)
+    public List<Transfer> transfersByUserId (@PathVariable int accountId) {return dao.listTransfersByUserId(accountId);
     }
 
-    @RequestMapping(path = "/{transferId}", method = RequestMethod.GET)
-    public Transfer transferByTransferId (@PathVariable int transferId) {return dao.getTransferByTransferId(transferId);
+    @RequestMapping(path = "/{userId}/{transferId}", method = RequestMethod.GET)
+    public Transfer transferByTransferId (@PathVariable int userId, @PathVariable int transferId) {return dao.getTransferByTransferId(transferId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

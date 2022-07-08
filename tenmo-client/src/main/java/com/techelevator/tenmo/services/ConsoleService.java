@@ -1,6 +1,8 @@
 package com.techelevator.tenmo.services;
 
 
+import com.techelevator.tenmo.model.Transfer;
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 
 import java.math.BigDecimal;
@@ -44,6 +46,28 @@ public class ConsoleService {
         System.out.println("5: Request TE bucks");
         System.out.println("0: Exit");
         System.out.println();
+    }
+
+    public void printTransfers(Transfer[] transfers) {
+        if (transfers != null) {
+            System.out.println("--------------------------------------------");
+            System.out.println("Transfers");
+            System.out.println("--------------------------------------------");
+            for (Transfer transfer : transfers) {
+                System.out.println(transfer.toString());
+            }
+        }
+    }
+
+    public void printUsers(User[] users) {
+        if (users != null) {
+            System.out.println("--------------------------------------------");
+            System.out.println("Users");
+            System.out.println("--------------------------------------------");
+            for (User user : users) {
+                System.out.println(user.toString());
+            }
+        }
     }
 
     public UserCredentials promptForCredentials() {
