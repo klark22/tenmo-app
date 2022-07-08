@@ -2,6 +2,7 @@ package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.JdbcAccountDao;
 import com.techelevator.tenmo.model.Account;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/account")
+@PreAuthorize("isAuthenticated()")
+
 public class AccountController {
 
     private JdbcAccountDao dao;
@@ -31,7 +34,7 @@ public class AccountController {
    */
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Account> get() {
+    public List<Account> getList() {
         return dao.listOfAccounts();
     }
 
