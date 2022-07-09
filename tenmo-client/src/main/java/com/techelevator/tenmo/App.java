@@ -130,16 +130,25 @@ public class App {
         User[] users = userServices.listUsers();
         printUsersOrError(users);
 
-        int from_id = userServices.getAccountByUserId(currentUser).getAccountId();
+        int from_account_id = userServices.getAccountByUserId(currentUser).getAccountId();
 
         //Get user input for to_account
+        int to_userId = consoleService.promptForInt("Please choose and option: ");
+        int to_accountId = to_userId + 2000;
 
         //Get user input for amount
+        BigDecimal amountToSendInput = consoleService.promptForBigDecimal("Please enter the amount to send: ");
 
         //Create a new transaction object with transaction constructor
+        Transfer newTransfer = new Transfer();
+        newTransfer.setType_id(1);
+        newTransfer.setStatus_id(2);
+        newTransfer.setAccount_from(from_account_id);
+        newTransfer.setAccount_to(to_accountId);
+        newTransfer.setAmount(amountToSendInput);
 
         //Pass new transaction into the createTransfer method
-
+        accountService.createTransfer(newTransfer);
 		
 	}
 
