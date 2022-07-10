@@ -64,8 +64,10 @@ public class ConsoleService {
             System.out.println("--------------------------------------------");
             System.out.println("Users");
             System.out.println("--------------------------------------------");
+            int counter = 1;
             for (User user : users) {
-                System.out.println(user.toString());
+                System.out.println(counter + ". " + user.toString());
+                counter++;
             }
         }
     }

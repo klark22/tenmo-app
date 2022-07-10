@@ -6,6 +6,7 @@ import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.ConsoleService;
 import com.techelevator.tenmo.services.UserServices;
+import com.techelevator.tenmo.services.RequestService;
 
 import java.math.BigDecimal;
 
@@ -16,6 +17,7 @@ public class App {
     private final ConsoleService consoleService = new ConsoleService();
     private final AccountService accountService = new AccountService();
     private final UserServices userServices = new UserServices();
+    private final RequestService requestService = new RequestService();
     private final AuthenticationService authenticationService = new AuthenticationService(API_BASE_URL);
 
     private AuthenticatedUser currentUser;
@@ -133,7 +135,7 @@ public class App {
         int from_account_id = userServices.getAccountByUserId(currentUser).getAccountId();
 
         //Get user input for to_account
-        int to_userId = consoleService.promptForInt("Please choose and option: ");
+        int to_userId = consoleService.promptForInt("Please choose an option: ");
         int to_accountId = to_userId + 2000;
 
         //Get user input for amount
@@ -149,11 +151,47 @@ public class App {
 
         //Pass new transaction into the createTransfer method
         accountService.createTransfer(newTransfer);
+        System.out.println("Transaction completed.");
 		
 	}
 
 	private void requestBucks() {
 		// TODO Auto-generated method stub
+
+        //list the users
+        // include error functions for requesting to self, $0, negatives
+        //test break vs null for error requests
+        // get user input for account from
+        //get user input for amount
+
+        // create new transaction object
+
+        //List users
+        User[] users = userServices.listUsers();
+        printUsersOrError(users);
+
+        //current user info
+        int requesting_user_id = userServices.getAccountByUserId(currentUser).getAccountId();
+
+        //  Get user input for person who will receive request
+        int request_money_from_user_id = consoleService.promptForInt("Please make a selection: ");
+        int to_accountId = request_money_from_user_id + 2000;
+
+        //Get user input for amount
+        BigDecimal amountToSendInput = consoleService.promptForBigDecimal("Please enter the amount to request: ");
+
+        //Create a new transaction object with transaction constructor
+        Transfer requestTransfer = new Transfer();
+        requestTransfer.setType_id(1);
+        requestTransfer.setStatus_id(1);
+        requestTransfer.setAccount_from(requesting_user_id);
+        requestTransfer.setAccount_to(to_accountId);
+        requestTransfer.setAmount(amountToSendInput);
+
+        //Pass new transaction into the createTransfer method
+        requestService.createRequest(requestTransfer);
+
+        System.out.println("Request sent.");
 		
 	}
 
