@@ -129,5 +129,17 @@ public class AccountService {
         return newTransfer;
     }
 
+    public Transfer createRequest(Transfer newRequest) {
+        try {
+            restTemplate.exchange(API_BASE_URL +"/request", HttpMethod.POST,
+                    makeTransferEntity(newRequest), Transfer.class );
+
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            BasicLogger.log(e.getMessage());
+        }
+
+        return newRequest;
+    }
+
     }
 

@@ -151,7 +151,7 @@ public class App {
 
         //Pass new transaction into the createTransfer method
         accountService.createTransfer(newTransfer);
-        System.out.println("Transaction completed.");
+
 		
 	}
 
@@ -189,9 +189,7 @@ public class App {
         requestTransfer.setAmount(amountToSendInput);
 
         //Pass new transaction into the createTransfer method
-        requestService.createRequest(requestTransfer);
-
-        System.out.println("Request sent.");
+        accountService.createRequest(requestTransfer);
 		
 	}
 

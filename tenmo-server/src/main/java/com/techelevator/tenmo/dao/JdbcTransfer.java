@@ -73,7 +73,10 @@ public class JdbcTransfer implements TransferDao{
         if (fromAccount.getBalance().compareTo(transfer.getAmount()) < 0) {
             System.out.println("Insufficient Balance");
             return null;
-        } else if (fromAccount.getAccountId() == transfer.getAccount_to()) {
+        } else if (transfer.getAmount().compareTo(BigDecimal.valueOf(0)) <= 0) {
+            return null;
+        }
+        else if (fromAccount.getAccountId() == transfer.getAccount_to()) {
             System.out.println("Cannot pay yourself, chief :(");
             return null;
         }

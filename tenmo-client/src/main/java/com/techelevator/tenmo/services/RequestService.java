@@ -39,22 +39,12 @@ public class RequestService {
 
 }
 
-public Transfer createRequest(Transfer newRequest) {
-        try {
-            restTemplate.exchange(API_BASE_URL +"/request/", HttpMethod.POST,
-                    makeTransferEntity(newRequest), Transfer.class );
 
-            } catch (RestClientResponseException | ResourceAccessException e) {
-                    BasicLogger.log(e.getMessage());
-        }
-
-        return newRequest;
-}
 
     public Transfer getTransferByTransferId(int transferId) {
         Transfer transfers = null;
 
-        try {  //USE makeAUTH ENTITY becaause its not a put or post
+        try {  //USE makeAUTH ENTITY because its not a put or post
             ResponseEntity<Transfer> response = restTemplate.exchange(API_BASE_URL +"/request" + transferId, HttpMethod.GET, makeAuthEntity(), Transfer.class);
 
             transfers = response.getBody();

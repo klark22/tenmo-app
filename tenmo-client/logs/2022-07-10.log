@@ -9,3 +9,7 @@
 2022-07-10T11:20:49.3036301 401 : [no body]
 2022-07-10T11:23:21.787849 401 : [no body]
 2022-07-10T11:24:20.7400981 401 : [no body]
+2022-07-10T11:32:34.6521512 401 : [no body]
+2022-07-10T11:33:05.0463526 401 : [no body]
+2022-07-10T11:34:04.8621271 401 : [no body]
+2022-07-10T11:55:58.506582 500 : [{"timestamp":"2022-07-10T15:55:58.481+00:00","status":500,"error":"Internal Server Error","message":"PreparedStatementCallback; SQL [INSERT INTO transfer ( transfer_type_id, transfer_status_id, accoun... (672 bytes)]
